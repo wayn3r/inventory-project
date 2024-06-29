@@ -1,0 +1,14 @@
+{
+  "name": "inventory_project",
+  "version": "1.0.0",
+  "description": "Inventory project for class ISO815",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Wayner",
+  "license": "ISC"
+}
