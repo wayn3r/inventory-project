@@ -1,0 +1,27 @@
+<div *ngIf="transaccion">
+    <h1>Editar Transacción</h1>
+    <form (ngSubmit)="save()">
+      <label>
+        Tipo de Transacción:
+        <input [(ngModel)]="transaccion.tipoTransaccion" name="tipoTransaccion">
+      </label>
+      <label>
+        Artículo ID:
+        <input [(ngModel)]="transaccion.articuloId" name="articuloID" type="number">
+      </label>
+      <label>
+        Fecha:
+        <input [(ngModel)]="transaccion.fecha" name="fecha" type="date">
+      </label>
+      <label>
+        Cantidad:
+        <input [(ngModel)]="transaccion.cantidad" name="cantidad" type="number">
+      </label>
+      <label>
+        Monto:
+        <input [(ngModel)]="transaccion.monto" name="monto" type="number">
+      </label>
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+  

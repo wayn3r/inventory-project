@@ -8,9 +8,9 @@ export class TransaccionService {
   constructor(
     @InjectRepository(Transaccion)
     private transaccionesRepository: Repository<Transaccion>,
-  ) {}
+  ) { }
 
-  findAll(): Promise<Transaccion[]> {
+  async findAll(): Promise<Transaccion[]> {
     return this.transaccionesRepository.find();
   }
 
@@ -23,7 +23,13 @@ export class TransaccionService {
   }
 
   async update(id: number, transaccion: Transaccion): Promise<Transaccion> {
-    await this.transaccionesRepository.update(id, transaccion);
+    await this.transaccionesRepository.update(id, {
+      tipoTransaccion: transaccion.tipoTransaccion,
+      articuloId: transaccion.articuloId,
+      fecha: transaccion.fecha,
+      cantidad: transaccion.cantidad,
+      monto: transaccion.monto,
+    });
     return this.transaccionesRepository.findOneBy({ id });
   }
 

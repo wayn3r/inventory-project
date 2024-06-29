@@ -1,0 +1,12 @@
+<div>
+    <h1>Transacciones</h1>
+    <button routerLink="/transacciones/new">Nueva Transacción</button>
+    <ul>
+      <li *ngFor="let transaccion of transacciones">
+        {{ transaccion.tipoTransaccion }} - {{ transaccion.cantidad }} - {{ transaccion.monto }}
+        <button [routerLink]="['/transacciones', transaccion.id]">Editar</button>
+        <button (click)="deleteTransaccion(transaccion.id)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+  

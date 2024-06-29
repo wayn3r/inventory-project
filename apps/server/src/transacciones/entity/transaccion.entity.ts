@@ -4,7 +4,7 @@ type TransactionType = 'Entrada' | 'Salida' | 'Traslado' | 'Ajuste';
 
 @Entity('Transacciones')
 export class Transaccion {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'ID' })
   id: number;
 
   @Column({ type: 'nvarchar', length: 10, name: 'TipoTransaccion' })
