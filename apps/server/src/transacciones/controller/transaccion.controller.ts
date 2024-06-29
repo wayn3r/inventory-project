@@ -25,7 +25,7 @@ export class TransaccionController {
   }
 
   @Post()
-  create(@Body() transaccion: Transaccion): Promise<Transaccion> {
+  create(@Body() transaccion: Transaccion): Promise<void> {
     return this.transaccionesService.create(transaccion);
   }
 

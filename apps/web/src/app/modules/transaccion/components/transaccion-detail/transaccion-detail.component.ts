@@ -20,6 +20,7 @@ export class TransaccionDetailComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.transaccionesService.getTransaccion(id).subscribe(data => {
       this.transaccion = data;
+      this.transaccion.fecha = new Date(this.transaccion.fecha).toISOString().split('T')[0];
     });
   }
 

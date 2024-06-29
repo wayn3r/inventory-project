@@ -7,7 +7,7 @@ export interface Transaccion {
   id: number;
   tipoTransaccion: string;
   articuloId: number;
-  fecha: Date;
+  fecha: Date | string;
   cantidad: number;
   monto: number;
 }

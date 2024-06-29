@@ -1,26 +1,34 @@
-<div>
+<div class="container mt-4">
   <h1>Nueva Transacción</h1>
   <form (ngSubmit)="save()">
-    <label>
-      Tipo de Transacción:
-      <input [(ngModel)]="transaccion.tipoTransaccion" name="tipoTransaccion">
-    </label>
-    <label>
-      Artículo ID:
-      <input [(ngModel)]="transaccion.articuloId" name="articuloID" type="number">
-    </label>
-    <label>
-      Fecha:
-      <input [(ngModel)]="transaccion.fecha" name="fecha" type="date">
-    </label>
-    <label>
-      Cantidad:
-      <input [(ngModel)]="transaccion.cantidad" name="cantidad" type="number">
-    </label>
-    <label>
-      Monto:
-      <input [(ngModel)]="transaccion.monto" name="monto" type="number">
-    </label>
-    <button type="submit">Guardar</button>
+    <div class="mb-3">
+      <label for="tipoTransaccion" class="form-label">Tipo de Transacción</label>
+      <select [(ngModel)]="transaccion.tipoTransaccion" name="tipoTransaccion" id="tipoTransaccion" class="form-select">
+        <option value="Entrada">Entrada</option>
+        <option value="Salida">Salida</option>
+        <option value="Traslado">Traslado</option>
+        <option value="Ajuste">Ajuste</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="articuloId" class="form-label">Artículo ID</label>
+      <input [(ngModel)]="transaccion.articuloId" name="articuloId" id="articuloId" type="number" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="fecha" class="form-label">Fecha</label>
+      <input [(ngModel)]="transaccion.fecha" name="fecha" id="fecha" type="date" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="cantidad" class="form-label">Cantidad</label>
+      <input [(ngModel)]="transaccion.cantidad" name="cantidad" id="cantidad" type="number" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="monto" class="form-label">Monto</label>
+      <input [(ngModel)]="transaccion.monto" name="monto" id="monto" type="number" class="form-control">
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <a routerLink="/transacciones" class="btn btn-outline-secondary">Cancelar</a> 
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
   </form>
 </div>

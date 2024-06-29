@@ -18,8 +18,14 @@ export class TransaccionService {
     return this.transaccionesRepository.findOneBy({ id });
   }
 
-  create(transaccion: Transaccion): Promise<Transaccion> {
-    return this.transaccionesRepository.save(transaccion);
+  async create(transaccion: Transaccion): Promise<void> {
+    await this.transaccionesRepository.insert({
+      tipoTransaccion: transaccion.tipoTransaccion,
+      articuloId: transaccion.articuloId,
+      fecha: transaccion.fecha,
+      cantidad: transaccion.cantidad,
+      monto: transaccion.monto,
+    });
   }
 
   async update(id: number, transaccion: Transaccion): Promise<Transaccion> {

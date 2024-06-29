@@ -12,7 +12,7 @@ export class TransaccionFormComponent {
     id: 0,
     tipoTransaccion: '',
     articuloId: 0,
-    fecha: new Date(),
+    fecha: new Date().toISOString().split('T')[0],
     cantidad: 0,
     monto: 0
   };
