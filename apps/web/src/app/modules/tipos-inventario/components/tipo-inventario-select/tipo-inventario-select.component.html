@@ -1,0 +1,7 @@
+<div class="mb-3">
+  <label for="tipoInventario" class="form-label">Tipo de Inventario</label>
+  <select [ngModel]="value || ''" (change)="onChange($event)" name="tipoInventario" id="tipoInventario" class="form-select">
+    <option value="" selected>Seleccione un tipo de inventario</option>
+    <option *ngFor="let tipoInventario of tiposInventario" [value]="tipoInventario.id"> {{ tipoInventario.descripcion }}</option>
+  </select>
+</div>

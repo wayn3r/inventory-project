@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <h1>Tipos de Inventario</h1>
+    <a routerLink="/tipos-inventario/new" class="btn btn-primary mb-3">Nuevo Tipo de Inventario</a>
+
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 mt-5 fw-bold">
+        <div class="col">Descripción</div>
+        <div class="col">Cuenta Contable</div>
+        <div class="col">Estado</div>
+        <div class="col">Acciones</div>
+      </div>
+
+    <ul class="list-group">
+        <li *ngFor="let tipoInventario of tiposInventario" class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="col">{{ tipoInventario.descripcion }}</span>
+                <span class="col">{{ tipoInventario.cuentaContable }}</span>
+                <span class="col">{{ tipoInventario.estado }}</span>
+                <div class="col">
+                    <a [routerLink]="['/tipos-inventario', tipoInventario.id]"
+                        class="btn btn-sm btn-outline-primary me-2">Editar</a>
+                    <button (click)="deleteTipoInventario(tipoInventario.id)"
+                        class="btn btn-sm btn-outline-danger">Eliminar</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

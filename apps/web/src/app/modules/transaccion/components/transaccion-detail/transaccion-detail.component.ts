@@ -13,7 +13,7 @@ export class TransaccionDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private transaccionesService: TransaccionesService
+    private transaccionesService: TransaccionesService,
   ) { }
 
   ngOnInit(): void {

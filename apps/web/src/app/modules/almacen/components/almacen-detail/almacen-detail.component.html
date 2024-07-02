@@ -1,0 +1,26 @@
+<div class="container mt-4" *ngIf="almacen">
+    <h1>Editar Almacen</h1>
+    <form (ngSubmit)="save()">
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input [(ngModel)]="almacen.descripcion" name="descripcion" id="descripcion" type="text"
+                class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="locacion" class="form-label">Locación</label>
+            <input [(ngModel)]="almacen.locacion" name="locacion" id="locacion" type="text"
+                class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="estado" class="form-label">Estado</label>
+            <select [(ngModel)]="almacen.estado" name="estado" id="estado" class="form-select">
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <a routerLink="/almacenes" class="btn btn-outline-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+</div>

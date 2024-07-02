@@ -1,0 +1,31 @@
+<div class="container mt-4" *ngIf="articulo">
+  <h1>Editar Articulo</h1>
+  <form (ngSubmit)="save()">
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea [(ngModel)]="articulo.descripcion" name="descripcion" id="descripcion" type="number" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="existencia" class="form-label">Existencia</label>
+      <input [(ngModel)]="articulo.existencia" name="existencia" id="existencia" type="number" class="form-control">
+    </div>
+    <app-tipo-inventario-select [(value)]="articulo.tipoInventarioId" />
+    <app-almacen-select [(value)]="articulo.almacenId" />
+    <div class="mb-3">
+      <label for="costoUnitario" class="form-label">Costo unitario</label>
+      <input [(ngModel)]="articulo.costoUnitario" name="costoUnitario" id="costoUnitario" type="number" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="estado" class="form-label">Estado</label>
+      <select [(ngModel)]="articulo.estado" name="estado" id="estado" class="form-select">
+        <option value="Existente">Existente</option>
+        <option value="Agotado">Agotado</option>
+      </select>
+    </div>
+    
+    <div class="d-flex align-items-center gap-3">
+      <a routerLink="/articulos" class="btn btn-outline-secondary">Cancelar</a> 
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,6 +7,7 @@ import { TransaccionesListComponent } from './components/transacciones-list/tran
 import { TransaccionFormComponent } from './components/transaccion-form/transaccion-form.component';
 import { TransaccionDetailComponent } from './components/transaccion-detail/transaccion-detail.component';
 import { CommonModule } from '@angular/common';
+import { ArticuloSelectComponent } from '../articulo/components/articulo-select/articulo-select.component';
 
 
 const appRoutes: Routes = [
@@ -21,9 +21,10 @@ const appRoutes: Routes = [
     TransaccionesListComponent,
     TransaccionDetailComponent,
     TransaccionFormComponent
-  ],
-  imports: [
+],
+imports: [
     CommonModule,
+    ArticuloSelectComponent,
     HttpClientModule,
     FormsModule,
     RouterModule.forChild(appRoutes)

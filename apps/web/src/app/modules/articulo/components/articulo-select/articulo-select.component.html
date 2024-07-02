@@ -1,0 +1,7 @@
+<div class="mb-3">
+  <label for="estado" class="form-label">Articulo</label>
+  <select [ngModel]="value || ''" (change)="onChange($event)" name="estado" id="estado" class="form-select">
+    <option value="" selected>Seleccione un articulo</option>
+    <option *ngFor="let articulo of articulos" [value]="articulo.id"> {{ articulo.descripcion }}</option>
+  </select>
+</div>
