@@ -12,7 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           port: Number(config.get('DB_PORT') || 1433),
           database: config.get('DB_NAME'),
           options: {
-            encrypt: false,
+            encrypt: config.get('DB_ENCRYPT') === 'true',
             trustServerCertificate: true,
           },
           authentication: {
