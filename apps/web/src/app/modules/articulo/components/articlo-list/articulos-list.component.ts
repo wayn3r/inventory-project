@@ -8,6 +8,12 @@ import { Articulo as articulos, ArticuloService } from '../../services/articulo.
 })
 export class ArticulosListComponent implements OnInit {
   articulos: articulos[] = [];
+  filter = {
+    descripcion: '',
+    estado: '',
+    existencia: undefined,
+    costo: undefined
+  }
 
   constructor(private articulosService: ArticuloService) { }
 
@@ -18,6 +24,12 @@ export class ArticulosListComponent implements OnInit {
   loadArticulos(): void {
     this.articulosService.getArticulos().subscribe(data => {
       this.articulos = data;
+    });
+  }
+
+  filterArticulos() {
+    this.articulosService.getArticulos(this.filter).subscribe(data => {
+        this.articulos = data;
     });
   }
 

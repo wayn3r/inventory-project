@@ -9,15 +9,23 @@ import {
   Query,
 } from '@nestjs/common';
 import { ArticuloService } from '../service/articulo.service';
-import { Articulo, ArticuloEstado } from '../entity/articulo.entity';
+import { Articulo, type ArticuloEstado } from '../entity/articulo.entity';
 
 @Controller('articulos')
 export class ArticuloController {
   constructor(private readonly articuloService: ArticuloService) {}
 
   @Get()
-  findAll(@Query('estado') estado?: ArticuloEstado): Promise<Articulo[]> {
-    return this.articuloService.findAll(estado);
+  findAll(@Query() filter?: Record<string, string>): Promise<Articulo[]> {
+    const { estado, existencia, descripcion, costo } = filter;
+    return this.articuloService.findAll({
+      existencia: Number.isInteger(parseInt(existencia))
+        ? Number(existencia)
+        : undefined,
+      costo: Number.isInteger(parseInt(costo)) ? Number(costo) : undefined,
+      descripcion,
+      estado: estado as ArticuloEstado,
+    });
   }
 
   @Get(':id')

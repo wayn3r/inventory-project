@@ -13,15 +13,20 @@ export interface Articulo {
   estado: string
 }
 
+type Filter = {
+    estado?: string;
+    existencia?: number;
+    descripcion?: string;
+  };
+
 @Injectable({ providedIn: 'root' })
 export class ArticuloService {
   private apiUrl = `${environment.apiUrl}/articulos`;
 
   constructor(private http: HttpClient) { }
 
-  getArticulos(estado?: string): Observable<Articulo[]> {
-    const queryParams = estado ? `?estado=${estado}` : '';
-    return this.http.get<Articulo[]>(this.apiUrl +  queryParams);
+  getArticulos(filter?: Filter): Observable<Articulo[]> {
+    return this.http.get<Articulo[]>(this.apiUrl, { params: filter });
   }
 
 

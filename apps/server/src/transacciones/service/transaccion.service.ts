@@ -4,7 +4,7 @@ import { Repository, Between, IsNull, In } from 'typeorm';
 import { Transaccion } from '../entity/transaccion.entity';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { xml2js, xml2json } from 'xml-js';
+import { xml2js } from 'xml-js';
 
 type Filter = {
   from: string;
@@ -43,10 +43,14 @@ export class TransaccionService {
   }
 
   async generateAsiento(filter: Filter, now = new Date()): Promise<void> {
-    const transacciones = await this.findAll(filter);
+    const where = this.mapFilters(filter);
+    const transacciones = await this.transaccionesRepository.find({
+      where: { ...where, asientoContable: IsNull() },
+    });
+    if (!transacciones.length) return;
 
     const montoTotal = transacciones.reduce((acc, t) => acc + t.monto, 0);
-    const descripcion = `Asiento generado automáticamente para el periodo de ${now.getMonth() + 1}-${now.getFullYear()}`;
+    const descripcion = `Asiento de Inventarios correspondiente al periodo ${now.getMonth() + 1}-${now.getFullYear()}`;
     // Generate asiento contable
     const soapRequest = `
       <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -84,7 +88,7 @@ export class TransaccionService {
       ]._text;
 
     await this.transaccionesRepository.update(
-      { id: In(transacciones.map((t) => t.id)) },
+      { id: In(transacciones.map((t) => t.id)), asientoContable: IsNull() },
       { asientoContable: String(id) },
     );
   }

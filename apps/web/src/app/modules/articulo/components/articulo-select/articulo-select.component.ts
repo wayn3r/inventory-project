@@ -25,7 +25,7 @@ export class ArticuloSelectComponent {
     ) { }
 
     ngOnInit(): void {
-        this.articuloService.getArticulos(this.filtrarEstado).subscribe(data => {
+        this.articuloService.getArticulos({ estado: this.filtrarEstado}).subscribe(data => {
             this.articulos = data;
         });
     }

@@ -1,7 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { Articulo, ArticuloEstado } from '../entity/articulo.entity';
+
+type Filter = {
+  estado?: ArticuloEstado;
+  existencia?: number;
+  costo?: number;
+  descripcion?: string;
+};
 
 @Injectable()
 export class ArticuloService {
@@ -10,8 +17,15 @@ export class ArticuloService {
     private articuloRepository: Repository<Articulo>,
   ) {}
 
-  async findAll(estado?: ArticuloEstado): Promise<Articulo[]> {
-    return this.articuloRepository.find({ where: { estado } });
+  async findAll(filter: Filter = {}): Promise<Articulo[]> {
+    const { estado, existencia, costo, descripcion = '' } = filter;
+    const where = {};
+    if (estado) where['estado'] = estado;
+    if (existencia) where['existencia'] = existencia;
+    if (costo) where['costoUnitario'] = costo;
+    if (descripcion) where['descripcion'] = Like(`%${descripcion}%`);
+
+    return this.articuloRepository.find({ where });
   }
 
   findOne(id: number): Promise<Articulo> {
