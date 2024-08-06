@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "test": "jest",
-    "start": "rm -rf apps/server/public && npm run build -w web && mv apps/web/dist apps/server/public && npm run build -w server && npm run start:prod -w server"
+    "build": "rm -rf apps/server/public && npm run build -w web && mv apps/web/dist apps/server/public && npm run build -w server",
+    "start": "npm run start:prod -w server"
   },
   "author": "Wayner",
   "license": "ISC"
