@@ -21,4 +21,7 @@ export class Transaccion {
 
   @Column({ name: 'monto', precision: 18, scale: 2 })
   monto: number;
+
+  @Column({ name: 'AsientoContable', nullable: true })
+  asientoContable: string;
 }

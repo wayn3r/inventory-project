@@ -6,6 +6,7 @@ import {
   Delete,
   Param,
   Body,
+  Query,
 } from '@nestjs/common';
 import { TransaccionService } from '../service/transaccion.service';
 import { Transaccion } from '../entity/transaccion.entity';
@@ -15,8 +16,13 @@ export class TransaccionController {
   constructor(private readonly transaccionesService: TransaccionService) {}
 
   @Get()
-  findAll(): Promise<Transaccion[]> {
-    return this.transaccionesService.findAll();
+  findAll(@Query() filter: Record<string, string>): Promise<Transaccion[]> {
+    const { from, to, noAsiento } = filter;
+    return this.transaccionesService.findAll({
+      from,
+      to,
+      noAsiento: noAsiento && noAsiento === 'true',
+    });
   }
 
   @Get(':id')
@@ -27,6 +33,16 @@ export class TransaccionController {
   @Post()
   create(@Body() transaccion: Transaccion): Promise<void> {
     return this.transaccionesService.create(transaccion);
+  }
+
+  @Post('generate-asiento')
+  generate(@Query() filter: Record<string, string>): Promise<void> {
+    const { from, to, noAsiento } = filter;
+    return this.transaccionesService.generateAsiento({
+      from,
+      to,
+      noAsiento: noAsiento && noAsiento === 'true',
+    });
   }
 
   @Put(':id')

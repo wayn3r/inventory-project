@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <h1>Create asiento contable</h1>
+  
+
+  <form class="d-flex justify-content-end gap-3 align-items-end" (ngSubmit)="filterTransactions()">
+      <div class="mr-3">
+        <label for="fecha" class="form-label">Desde</label>
+        <input [(ngModel)]="filter.from" name="from" id="from" type="date" class="form-control">
+      </div>
+      <div class="mr-3">
+        <label for="fecha" class="form-label">Hasta</label>
+        <input [(ngModel)]="filter.to" name="to" id="to" type="date" class="form-control">
+      </div>
+
+      <!-- Add a checkbox -->
+        <div class="form-check mr-3">
+            <input class="form-check-input" name="noAsiento" type="checkbox" id="flexCheckDefault" [(ngModel)]="filter.noAsiento" >
+            <label class="form-check-label" for="flexCheckDefault">
+            Sin asiento contable
+            </label>
+        </div>
+
+      <button class="btn btn-outline-secondary">Filtrar</button>
+  </form>
+
+
+
+  <!-- Encabezado de la lista -->
+  <div class="d-flex justify-content-between align-items-center px-3 py-2 mt-5 fw-bold">
+    <div class="col">Tipo de Transacción</div>
+    <div class="col">Cantidad</div>
+    <div class="col">Monto</div>
+    <div class="col">Fecha</div>
+    <div class="col">Id Asiento</div>
+  </div>
+
+  <!-- Lista de transacciones -->
+  <ul class="list-group">
+    
+    <li  class="d-flex justify-content-center align-items-center mt-3 text-muted" *ngIf="!transacciones.length">
+      La lista esta vacía
+    </li>
+    <li *ngFor="let transaccion of transacciones" class="list-group-item">
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="col">{{ transaccion.tipoTransaccion }}</span>
+        <span class="col">{{ transaccion.cantidad | number }}</span>
+        <span class="col">{{ transaccion.monto | currency }}</span>
+        <span class="col">{{ transaccion.fecha | date }}</span>
+        <span class="col">{{ transaccion.asientoContable || '-' }}</span>
+      </div>
+    </li>
+  </ul>
+  <button  class="btn btn-primary d-block ms-auto mt-3" (click)="generateAsiento()" [disabled]="!filter.noAsiento || !transacciones.length">Generar asiento</button>
+</div>

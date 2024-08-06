@@ -41,5 +41,6 @@ CREATE TABLE Transacciones (
     Fecha DATETIME NOT NULL,
     Cantidad INT NOT NULL,
     Monto DECIMAL(18, 2) NOT NULL,
+    AsientoContable NVARCHAR(50) NULL,
     FOREIGN KEY (ArticuloID) REFERENCES Articulos(ID),
 );

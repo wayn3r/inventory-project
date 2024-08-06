@@ -18,6 +18,10 @@ export const routes: Routes = [
     loadChildren: () => import('./modules/almacen/almacen.module').then(m => m.AlmacenModule)
   },
   {
+    path: 'asiento-contable',
+    loadChildren: () => import('./modules/asiento-contable/asiento-contable.module').then(m => m.AsientoContableModule)
+  },
+  {
     path: '',
     loadComponent: () => import('./common/components').then(m => m.HomeComponent)
   },

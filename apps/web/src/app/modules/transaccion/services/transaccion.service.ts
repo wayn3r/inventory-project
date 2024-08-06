@@ -10,6 +10,7 @@ export interface Transaccion {
   fecha: Date | string;
   cantidad: number;
   monto: number;
+  asientoContable?: string | null
 }
 
 @Injectable({
@@ -20,8 +21,12 @@ export class TransaccionesService {
 
   constructor(private http: HttpClient) {}
 
-  getTransacciones(): Observable<Transaccion[]> {
-    return this.http.get<Transaccion[]>(this.apiUrl);
+  generateAsiento(filter: Record<string, any>): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/generate-asiento`, { filter });
+  }
+  
+  getTransacciones(filter: Record<string, any> = {}): Observable<Transaccion[]> {
+    return this.http.get<Transaccion[]>(this.apiUrl, { params: filter});
   }
 
   getTransaccion(id: number): Observable<Transaccion> {
