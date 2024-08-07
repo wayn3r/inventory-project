@@ -88,7 +88,7 @@ export class TransaccionService {
       ]._text;
 
     await this.transaccionesRepository.update(
-      { ...where, asientoContable: IsNull() },
+      transacciones.map((t) => t.id),
       { asientoContable: String(id) },
     );
   }
