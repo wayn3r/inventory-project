@@ -10,6 +10,8 @@ type Filter = {
   descripcion?: string;
 };
 
+const allowedStatus = ['Existente', 'Agotado'];
+
 @Injectable()
 export class ArticuloService {
   constructor(
@@ -20,7 +22,7 @@ export class ArticuloService {
   async findAll(filter: Filter = {}): Promise<Articulo[]> {
     const { estado, existencia, costo, descripcion = '' } = filter;
     const where = {};
-    if (estado) where['estado'] = estado;
+    if (allowedStatus.includes(estado)) where['estado'] = estado;
     if (existencia) where['existencia'] = existencia;
     if (costo) where['costoUnitario'] = costo;
     if (descripcion) where['descripcion'] = Like(`%${descripcion}%`);
